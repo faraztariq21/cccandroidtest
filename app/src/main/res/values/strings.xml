@@ -2,4 +2,12 @@
     <string name="app_name">CccandroidTest</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="person_dp">personDp</string>
+    <string name="est_number">Est. Number</string>
+    <string name="est_details">Est. Details</string>
+    <string name="created">Created</string>
+    <string name="requester">Requester</string>
+    <string name="revision_number">Revision Number</string>
+    <string name="created_by">Created By</string>
+    <string name="contact">Contact</string>
 </resources>

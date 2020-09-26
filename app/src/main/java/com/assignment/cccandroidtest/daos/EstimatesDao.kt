@@ -4,15 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.assignment.cccandroidtest.models.Estimate
 import com.assignment.cccandroidtest.models.Person
+import io.reactivex.Flowable
 
 @Dao
 interface EstimatesDao {
 
     @Query("SELECT * from estimate_table")
-    fun getAllEstimates(): LiveData<List<Estimate>>
+    fun getAllEstimates(): Flowable<List<Estimate>>
 
     @Query("SELECT * from estimate_table WHERE id = :estimateId")
-    fun getEstimateById(estimateId : String): LiveData<Estimate>
+    fun getEstimateById(estimateId : String): Flowable<Estimate>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(estimate: Estimate)

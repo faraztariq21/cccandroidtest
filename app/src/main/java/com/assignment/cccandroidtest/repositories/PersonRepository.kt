@@ -8,7 +8,7 @@ import com.assignment.cccandroidtest.models.Person
 class PersonRepository(private val personsDao: PersonsDao) {
 
 
-    val allPersons: LiveData<List<Person>> = personsDao.getAllPersons()
+    val allPersons = personsDao.getAllPersons()
 
     fun personsById(personId: String) = personsDao.getPersonById(personId)
 
