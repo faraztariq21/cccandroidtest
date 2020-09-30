@@ -8,6 +8,6 @@ import com.assignment.cccandroidtest.ApplicationManager
 class ViewModelFactory: ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return modelClass.getConstructor(MainFragmentViewModel::class.java).newInstance()
+        return MainFragmentViewModel() as T
     }
 }

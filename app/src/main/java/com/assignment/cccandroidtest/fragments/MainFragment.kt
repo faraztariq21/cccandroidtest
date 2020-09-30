@@ -14,6 +14,8 @@ import com.assignment.cccandroidtest.viewmodels.MainFragmentViewModel
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.ViewModelProviders
 import com.assignment.cccandroidtest.viewmodels.ViewModelFactory
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_main.*
 
 
@@ -31,8 +33,7 @@ class MainFragment : Fragment() {
         viewDataBinding = FragmentMainBinding.inflate(inflater, container, false).apply {
             viewmodel =
                 ViewModelProvider(
-                    this@MainFragment,
-                    ViewModelFactory()
+                    this@MainFragment
                 ).get(MainFragmentViewModel::class.java)
 
             lifecycleOwner = viewLifecycleOwner
@@ -52,17 +53,19 @@ class MainFragment : Fragment() {
 //            updateEstimateValues(it.first,it.second)
 //        })
 
-        val personDispose = viewDataBinding.viewmodel?.allPersons?.subscribe { person ->
-            this.person = person[0]
-            updateEstimateValues()
-            updateView()
-        }
-
-        val estimateDispose = viewDataBinding.viewmodel?.allEstimates?.subscribe { estimate ->
-            this.estimate = estimate[0]
-            updateEstimateValues()
-            updateView()
-        }
+          val personDispose = viewDataBinding.viewmodel?.allPersons!!.observeOn(AndroidSchedulers.mainThread())
+              .subscribe { person ->
+              this.person = person[0]
+              updateEstimateValues()
+              updateView()
+          }
+  
+          val estimateDispose = viewDataBinding.viewmodel?.allEstimates!!.observeOn(AndroidSchedulers.mainThread())
+              .subscribe { estimate ->
+              this.estimate = estimate[0]
+              updateEstimateValues()
+              updateView()
+          }
     }
 
     private fun updateEstimateValues() {

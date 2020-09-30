@@ -21,7 +21,7 @@ open class MainFragmentViewModel : AndroidViewModel(ApplicationManager.instance)
     val allPersons: Flowable<List<Person>>
 
     private val estimateRepository: EstimateRepository
-    val allEstimates: Flowable<List<Estimate>>
+
 
     init {
         val personsDao = AppRoomDatabase.getDatabase(ApplicationManager.instance, viewModelScope).personDao()
@@ -30,8 +30,9 @@ open class MainFragmentViewModel : AndroidViewModel(ApplicationManager.instance)
 
         val estimatesDao = AppRoomDatabase.getDatabase(ApplicationManager.instance, viewModelScope).estimateDao()
         estimateRepository = EstimateRepository(estimatesDao)
-        allEstimates = estimateRepository.allEstimates
     }
+
+    val allEstimates: Flowable<List<Estimate>> = estimateRepository.allEstimates
 
     fun updateEstimate(estimate: Estimate) = viewModelScope.launch(Dispatchers.IO) {
         estimateRepository.update(estimate)
